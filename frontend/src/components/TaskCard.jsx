@@ -50,7 +50,7 @@ const TaskCard = ({ task, refresh, setPageError, onEdit }) => {
 
     const stop = async () => {
         accumulatedRef.current += Date.now() - startRef.current;
-        const mins = Math.round(accumulatedRef.current / 60000);
+        const mins = accumulatedRef.current / 60000;
         setElapsed(accumulatedRef.current);
         setRunning(false);
         if (audioRef.current) {
