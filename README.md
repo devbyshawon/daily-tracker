@@ -68,27 +68,27 @@ The backend follows strict **MVC architecture** (Model / Controller / Routes cle
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    CLIENT (React + Vite)                 │
-│  Pages: Dashboard                                        │
-│  Components: TaskCard (timer + comment + resource link), │
-│              shared/Modal, shared/DashboardLayout        │
-│  HTTP: Axios instance (services/api.js)                  │
+│                    CLIENT (React + Vite)                │
+│  Pages: Dashboard                                       │
+│  Components: TaskCard (timer + comment + resource link),│
+│              shared/Modal, shared/DashboardLayout       │
+│  HTTP: Axios instance (services/api.js)                 │
 └──────────────────────────┬──────────────────────────────┘
                            │ HTTPS REST API
 ┌──────────────────────────▼──────────────────────────────┐
-│                 SERVER (Node.js + Express, MVC)           │
-│  Routes: /api/tasks                                       │
-│  Controller: taskController                               │
-│    — buffer sweep on every read                          │
-│    — create blocked while buffer is non-empty             │
-│    — edit/delete blocked on buffered tasks                │
+│                 SERVER (Node.js + Express, MVC)         │
+│  Routes: /api/tasks                                     │
+│  Controller: taskController                             │
+│    — buffer sweep on every read                         │
+│    — create blocked while buffer is non-empty           │
+│    — edit/delete blocked on buffered tasks              │
 └──────────────────────────┬──────────────────────────────┘
                            │ Mongoose ODM
 ┌──────────────────────────▼──────────────────────────────┐
-│                  DATABASE (MongoDB Atlas)                 │
-│  Collection: tasks                                         │
-│  Status states: pending → done                             │
-│                 pending → buffer → pending (resolved)       │
+│                  DATABASE (MongoDB Atlas)               │
+│  Collection: tasks                                      │
+│  Status states: pending → done                          │
+│                 pending → buffer → pending (resolved)   │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -110,15 +110,15 @@ git clone https://github.com/devbyshawon/daily-tracker
 cd daily-tracker
 ```
 
-> Note: unlike some of the author's other projects that use separate frontend/backend repos, Daily Tracker is a single repository with `server/` and `client/` folders.
+> Note: unlike some of the author's other projects that use separate frontend/backend repos, Daily Tracker is a single repository with `backend/` and `frontend/` folders.
 
 **2. Set up the backend:**
 ```bash
-cd server
+cd backend
 npm install
 ```
 
-Create a `.env` file in the root of `server`:
+Create a `.env` file in the root of `backend`:
 ```
 MONGO_URI=your_mongodb_atlas_connection_string
 CLIENT_URL=http://localhost:5173
@@ -133,11 +133,11 @@ The backend runs on `http://localhost:6001`
 
 **3. Set up the frontend:**
 ```bash
-cd ../client
+cd ../frontend
 npm install
 ```
 
-Create a `.env` file in the root of `client`:
+Create a `.env` file in the root of `frontend`:
 ```
 VITE_API_URL=http://localhost:6001/api
 ```
@@ -152,7 +152,7 @@ The frontend runs on `http://localhost:5173`
 
 ## Environment Variables
 
-**Backend** (`server/.env`):
+**Backend** (`backend/.env`):
 
 | Variable | Description | Example |
 |----------|-------------|---------|
@@ -160,7 +160,7 @@ The frontend runs on `http://localhost:5173`
 | `CLIENT_URL` | Frontend origin, used for CORS | `http://localhost:5173` |
 | `PORT` | Port the server listens on | `6001` |
 
-**Frontend** (`client/.env`):
+**Frontend** (`frontend/.env`):
 
 | Variable | Description | Example |
 |----------|-------------|---------|
